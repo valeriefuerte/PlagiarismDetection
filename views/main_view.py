@@ -51,11 +51,13 @@ class MainView(QMainWindow):
         self._ui.distanceComboBox.addItem("Левенштейна")
         self._ui.distanceComboBox.addItem("Жаккара")
 
+
     def con(self):
         self._ui.themeComboBox.currentIndexChanged.connect(self.themeComboBoxChanged)
         self._ui.distanceComboBox.currentIndexChanged.connect(self.distanceComboBoxChanged)
         self._ui.studentsTableView.clicked.connect(self.studentsTableViewClicked)
         self._ui.tasksTableView.clicked.connect(self.tasksTableViewClicked)
+
 
     def showDialog(self):
         dir = str(QFileDialog.getExistingDirectory(self, 'Выберите папкy', '/home/valerie/University/Diploma/Math-packages-course-automatization/mp2017-collect'))
@@ -74,6 +76,7 @@ class MainView(QMainWindow):
 
             self.showStudents(self.listOfTasks[0])
 
+
     def showStudents(self, dir):
         self.studentsDir = getListOfFiles(dir, "*.m")
         studentsList = list(list())
@@ -90,6 +93,7 @@ class MainView(QMainWindow):
         self._ui.studentsTableView.horizontalHeader().hide()
         self._ui.studentsTableView.horizontalHeader().setStretchLastSection(True)
 
+
     def themeComboBoxChanged(self, i):
         self.studentsList.clear()
         self._ui.programPlainTextEdit.clear()
@@ -97,6 +101,7 @@ class MainView(QMainWindow):
         self.activeTheme = i
         theme = self.listOfTasks[i].split(self._model.getDirectory())[1].split('/')[1]
         self._model.setTheme(theme)
+
 
     def studentsTableViewClicked(self, i):
         index = self._ui.studentsTableView.selectedIndexes()[0].row()
@@ -109,13 +114,8 @@ class MainView(QMainWindow):
         self._ui.tasksTableView.horizontalHeader().hide()
         self._ui.tasksTableView.horizontalHeader().setStretchLastSection(True)
 
+
     def tasksTableViewClicked(self, i):
-        # debug canvas
-
-        # self.clusterView.debug()
-
-        # end debug canvas
-
         index = self._ui.tasksTableView.selectedIndexes()[0].row()
         self.currentFile = self.studentsTasks[index]
         self._ui.programPlainTextEdit.clear()
@@ -130,6 +130,7 @@ class MainView(QMainWindow):
         listOfTokens = self._model.getTokens()
         self.findLoops(listOfTokens[index])
 
+
     def countDistance(self, i):
         directory = self._model.getDirectory()
         problem = self._model.getTheme()
@@ -142,16 +143,14 @@ class MainView(QMainWindow):
                     #print(task)
                     #print(listOfFiles)
                     self._main_controller.countDistance(listOfFiles, task, self.studentsList, i)
-                    #print(self._model.getDistance())
-                    #self.clusterView = PlotCanvas(self, width=1, height=1, dpi=100)
                     self.clusterView.plot(self._model.getDistance())
-                    #self.clusterView._update_dpi()
-        #print(dirName)
+
 
     def distanceComboBoxChanged(self, i):
         self.activeDistance = i
         print(self.activeDistance)
         self.countDistance(self.activeDistance)
+
 
     def viewSameStudents(self, index, d):
         print(index)
@@ -160,6 +159,7 @@ class MainView(QMainWindow):
             df = read_csv('distance.csv', usecols=[0])
             listOfDistances = df.values
             print(listOfDistances)
+
 
     def findLoops(self, tokens):
         countF = 0
@@ -181,14 +181,6 @@ class MainView(QMainWindow):
 
 
 
-
-'''
-        # listen for model event signals
-        self._model.amount_changed.connect(self.on_amount_changed)
-        self._model.even_odd_changed.connect(self.on_even_odd_changed)
-        self._model.enable_reset_changed.connect(self.on_enable_reset_changed)
-'''
-
 def getListOfFiles(dirName, pattern):
     # create a list of file and sub directories
     # names in the given directory
@@ -205,6 +197,7 @@ def getListOfFiles(dirName, pattern):
         else:
             allFiles.append(fullPath)
     return allFiles
+
 
 def getText(dir):
     try:
