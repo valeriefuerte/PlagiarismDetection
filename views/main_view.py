@@ -179,6 +179,10 @@ class MainView(QMainWindow):
         if(countF == 0 & countW == 0 & countR == 0):
             print("No loop")
 
+        self._ui.forLineEdit.setText(str(countF))
+        self._ui.whileLineEdit.setText(str(countW))
+        self._ui.repeatLineEdit.setText(str(countR))
+
 
 
 def getListOfFiles(dirName, pattern):
