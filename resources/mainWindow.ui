@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1879</width>
-    <height>1000</height>
+    <width>1640</width>
+    <height>772</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -32,8 +32,8 @@
      <height>16777215</height>
     </size>
    </property>
-   <layout class="QGridLayout" name="gridLayout_2">
-    <item row="0" column="2" rowspan="3">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="1" column="2">
      <widget class="QFrame" name="settingsFrame">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -41,13 +41,55 @@
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_7">
+      <layout class="QGridLayout" name="gridLayout_2">
        <item row="0" column="0">
         <widget class="QGroupBox" name="settingsGroupBox">
          <property name="title">
           <string>Настройки</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_6">
+          <item row="5" column="0">
+           <widget class="QLabel" name="forLabel">
+            <property name="text">
+             <string>For Loop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="repeatLabel">
+            <property name="text">
+             <string>Repeat Loop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QLineEdit" name="whileLineEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="forLineEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="LoopLabel">
+            <property name="text">
+             <string>Использование циклов в программе</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="whileLabel">
+            <property name="text">
+             <string>While Loop</string>
+            </property>
+           </widget>
+          </item>
           <item row="0" column="0">
            <widget class="QLabel" name="distanceLabel">
             <property name="text">
@@ -55,21 +97,22 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
-           <spacer name="verticalSpacer">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="0">
+          <item row="1" column="0" colspan="2">
            <widget class="QComboBox" name="distanceComboBox"/>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="repeatLineEdit">
+            <property name="readOnly">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" colspan="2">
+           <widget class="Line" name="line">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
           </item>
          </layout>
         </widget>
@@ -77,8 +120,14 @@
       </layout>
      </widget>
     </item>
-    <item row="2" column="0" colspan="2">
+    <item row="1" column="0" colspan="2">
      <widget class="QFrame" name="similarFrame">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
@@ -88,6 +137,12 @@
       <layout class="QGridLayout" name="gridLayout_3">
        <item row="0" column="1">
         <widget class="QGroupBox" name="similarGroupBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="title">
           <string>Похожие студенты</string>
          </property>
@@ -96,7 +151,7 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>611</width>
+            <width>241</width>
             <height>271</height>
            </rect>
           </property>
@@ -105,6 +160,12 @@
        </item>
        <item row="0" column="0">
         <widget class="QGroupBox" name="programGroupBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="title">
           <string>Текст программы</string>
          </property>
@@ -113,7 +174,7 @@
            <rect>
             <x>0</x>
             <y>20</y>
-            <width>611</width>
+            <width>241</width>
             <height>271</height>
            </rect>
           </property>
@@ -126,54 +187,107 @@
       </layout>
      </widget>
     </item>
-    <item row="0" column="0" rowspan="2" colspan="2">
+    <item row="0" column="2">
+     <widget class="QWidget" name="clusterWidget" native="true">
+      <property name="minimumSize">
+       <size>
+        <width>500</width>
+        <height>400</height>
+       </size>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="0" colspan="2">
      <widget class="QFrame" name="frame">
+      <property name="minimumSize">
+       <size>
+        <width>500</width>
+        <height>0</height>
+       </size>
+      </property>
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
       </property>
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <layout class="QGridLayout" name="gridLayout_5">
+      <layout class="QGridLayout" name="gridLayout_4">
        <item row="0" column="0">
+        <widget class="QLabel" name="themeLabel">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Тема</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="1">
         <widget class="QComboBox" name="themeComboBox"/>
        </item>
-       <item row="2" column="0">
+       <item row="1" column="1" rowspan="2">
         <widget class="QGroupBox" name="tasksGroupBox">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="title">
           <string>Задания</string>
          </property>
          <widget class="QTableView" name="tasksTableView">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>20</y>
-            <width>601</width>
-            <height>261</height>
+            <x>-3</x>
+            <y>23</y>
+            <width>241</width>
+            <height>331</height>
            </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </widget>
        </item>
-       <item row="1" column="0">
+       <item row="1" column="0" rowspan="2">
         <widget class="QGroupBox" name="studentsGroupBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
          <property name="title">
           <string>Студенты</string>
          </property>
          <widget class="QTableView" name="studentsTableView">
           <property name="geometry">
            <rect>
-            <x>0</x>
-            <y>20</y>
-            <width>601</width>
-            <height>251</height>
+            <x>-3</x>
+            <y>22</y>
+            <width>241</width>
+            <height>331</height>
            </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
           </property>
          </widget>
         </widget>
-       </item>
-       <item row="0" column="1" rowspan="3">
-        <widget class="QWidget" name="clusterWidget" native="true"/>
        </item>
       </layout>
      </widget>
@@ -185,8 +299,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1879</width>
-     <height>25</height>
+     <width>1640</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
