@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QAction, QFileDialog, QVBoxLayout
 
 from models.tasksModel import TasksModel
 from models.studentsModel import StudentsModel
-
+from models.similarStudentsModel import SimilarStudentsModel
 from views.mainWindow_ui import Ui_MainWindow
 from views.cluster_view import PlotCanvas
 
@@ -125,7 +125,7 @@ class MainView(QMainWindow):
 
         self.countDistance(self.activeDistance)
 
-        self.viewSameStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), self.activeDistance)
+        self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), self.activeDistance)
 
         listOfTokens = self._model.getTokens()
         self.findLoops(listOfTokens[index])
@@ -152,13 +152,21 @@ class MainView(QMainWindow):
         self.countDistance(self.activeDistance)
 
 
-    def viewSameStudents(self, index, d):
-        print(index)
-
+    def viewSimilarStudents(self, index, d):
+        listOfSimilar = list(list())
         if(d == 0):
-            df = read_csv('distance.csv', usecols=[0])
+            df = read_csv('distance.csv', usecols=[index])
             listOfDistances = df.values
-            print(listOfDistances)
+            for i in range(len(listOfDistances)):
+                listOfSimilar.insert(i, [self.studentsList[i][0], listOfDistances[i][0]])
+                #print(listOfDistances[i][0])
+                #print(self.studentsList[i][0])
+            print(listOfSimilar)
+
+        self.similarStudentsModel = SimilarStudentsModel(listOfSimilar)
+        self._ui.similarTableView.setModel(self.similarStudentsModel)
+        self._ui.similarTableView.horizontalHeader().hide()
+        self._ui.similarTableView.horizontalHeader().setStretchLastSection(True)
 
 
     def findLoops(self, tokens):
@@ -169,15 +177,15 @@ class MainView(QMainWindow):
             t = tokens[i][1]
             if t == 'for':
                 countF += 1
-                print("For loop")
+                #print("For loop")
             if t == 'while':
                 countW += 1
-                print("While loop")
+                #print("While loop")
             if t == 'repeat':
                 countR += 1
-                print("Repeat loop")
-        if(countF == 0 & countW == 0 & countR == 0):
-            print("No loop")
+                #print("Repeat loop")
+        #if(countF == 0 & countW == 0 & countR == 0):
+            #print("No loop")
 
         self._ui.forLineEdit.setText(str(countF))
         self._ui.whileLineEdit.setText(str(countW))
