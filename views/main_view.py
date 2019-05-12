@@ -150,20 +150,22 @@ class MainView(QMainWindow):
         self.activeDistance = i
         print(self.activeDistance)
         self.countDistance(self.activeDistance)
+        self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), self.activeDistance)
 
 
     def viewSimilarStudents(self, index, d):
         listOfSimilar = list(list())
         if(d == 0):
             df = read_csv('distance.csv', usecols=[index])
-            listOfDistances = df.values
-            for i in range(len(listOfDistances)):
-                listOfSimilar.insert(i, [self.studentsList[i][0], listOfDistances[i][0]])
-                #print(listOfDistances[i][0])
-                #print(self.studentsList[i][0])
-            print(listOfSimilar)
+        if(d == 1):
+            df = read_csv('distanceJaccard.csv', usecols=[index])
+        listOfDistances = df.values
+        for i in range(len(listOfDistances)):
+            listOfSimilar.insert(i, [self.studentsList[i][0], listOfDistances[i][0]])
 
-        self.similarStudentsModel = SimilarStudentsModel(listOfSimilar)
+        ss = sorted(listOfSimilar, key=lambda student: student[1])
+
+        self.similarStudentsModel = SimilarStudentsModel(ss)
         self._ui.similarTableView.setModel(self.similarStudentsModel)
         self._ui.similarTableView.horizontalHeader().hide()
         self._ui.similarTableView.horizontalHeader().setStretchLastSection(True)
