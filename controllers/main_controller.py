@@ -46,7 +46,7 @@ class MainController(QObject):
             with open('distance.csv', 'w') as distanceFile:
                 #distanceFile.write('1, ')
                 for i in range(len(tokens)):
-                    if(i != len(tokens)-1):
+                    if i != len(tokens)-1:
                             distanceFile.write(studentsList[i][0] + ",")
                     else:
                         distanceFile.write(studentsList[i][0])
@@ -55,7 +55,7 @@ class MainController(QObject):
                     #distanceFile.write(studentsList[i][0] + ";")
                     for j in range(len(tokens)):
                         strDistance = str(self.leveshtein_distance(tokens[i], tokens[j]))
-                        if(j != len(tokens)-1):
+                        if j != len(tokens)-1:
                             distanceFile.write(strDistance + ',')
                         else:
                             distanceFile.write(strDistance)
@@ -66,12 +66,12 @@ class MainController(QObject):
             #print(listOfDistances)
             self._model.setDistance(listOfDistances)
 
-        if(dist == 1):
+        if dist == 1:
             print("jaccard")
             with open('distanceJaccard.csv', 'w') as distanceFile:
                 #distanceFile.write(' ;')
                 for i in range(len(tokens)):
-                    if(i != len(tokens)-1):
+                    if i != len(tokens)-1:
                         distanceFile.write(studentsList[i][0] + ",")
                     else:
                         distanceFile.write(studentsList[i][0])
@@ -80,7 +80,7 @@ class MainController(QObject):
                     #distanceFile.write(studentsList[i][0] + ";")
                     for j in range(len(tokens)):
                         strDistance = str(self.jaccard_distance(set(tokens[i]), set(tokens[j])))
-                        if(j != len(tokens)-1):
+                        if j != len(tokens)-1:
                             distanceFile.write(strDistance + ',')
                         else:
                             distanceFile.write(strDistance)
@@ -132,9 +132,3 @@ class MainController(QObject):
 
     def jaccard_distance(self, token1, token2):
         return (len(token1.union(token2)) - len(token1.intersection(token2))) / len(token1.union(token2))
-
-'''
-    @pyqtSlot(str)
-    def on_distance_change(self):
-        print(self._model.getDistance())
-'''

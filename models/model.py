@@ -1,8 +1,6 @@
-from PyQt5.QtCore import QObject, pyqtSignal
+from PyQt5.QtCore import QObject
 
 class Model(QObject):
-    #distance_changed = pyqtSignal(str)
-
     def __init__(self):
         super().__init__()
         self._directory = ''
@@ -47,14 +45,3 @@ class Model(QObject):
 
     def getDistance(self):
         return self._distance
-
-'''
-    @property
-    def directory(self):
-        return self._directory
-
-    @directory.setter
-    def directory(self, value):
-        self._directory = value
-        self.directory_changed.emit(value)
-'''

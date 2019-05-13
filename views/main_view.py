@@ -135,13 +135,11 @@ class MainView(QMainWindow):
         directory = self._model.getDirectory()
         problem = self._model.getTheme()
         task = self._model.getTask()
-        if(directory):
-            if(problem):
-                if(task):
+        if directory:
+            if problem:
+                if task:
                     dirName = directory + "/" + problem
                     listOfFiles = getListOfFiles(dirName, "*.m")
-                    #print(task)
-                    #print(listOfFiles)
                     self._main_controller.countDistance(listOfFiles, task, self.studentsList, i)
                     d = self._model.getDistance()
                     print(d)
@@ -151,7 +149,6 @@ class MainView(QMainWindow):
     def distanceComboBoxChanged(self, i):
         self._model.setActiveDistance(i)
         activeDistance = self._model.getActiveDistance()
-        print(activeDistance)
         self.countDistance(activeDistance)
         if self._ui.studentsTableView.selectedIndexes() != []:
             self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), activeDistance)
@@ -183,13 +180,13 @@ class MainView(QMainWindow):
             t = tokens[i][1]
             if t == 'for':
                 countF += 1
-                #print("For loop")
+                print("For loop")
             if t == 'while':
                 countW += 1
-                #print("While loop")
+                print("While loop")
             if t == 'repeat':
                 countR += 1
-                #print("Repeat loop")
+                print("Repeat loop")
         #if(countF == 0 & countW == 0 & countR == 0):
             #print("No loop")
 
