@@ -30,7 +30,6 @@ class MainView(QMainWindow):
         self.studentsTasks = list()
 
         self.activeTheme = 0
-        self.activeDistance = 0
         self.currentFile = ''
         self.initUI()
         self.con()
@@ -123,9 +122,10 @@ class MainView(QMainWindow):
 
         self._model.setTask(self.currentFile.split(self._model.getDirectory())[1].split(self._model.getTheme())[1].split('/')[2])
 
-        self.countDistance(self.activeDistance)
+        activeDistance = self._model.getActiveDistance()
+        self.countDistance(activeDistance)
 
-        self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), self.activeDistance)
+        self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), activeDistance)
 
         listOfTokens = self._model.getTokens()
         self.findLoops(listOfTokens[index])
@@ -143,21 +143,25 @@ class MainView(QMainWindow):
                     #print(task)
                     #print(listOfFiles)
                     self._main_controller.countDistance(listOfFiles, task, self.studentsList, i)
-                    self.clusterView.plot(self._model.getDistance())
+                    d = self._model.getDistance()
+                    print(d)
+                    self.clusterView.plot(d)
 
 
     def distanceComboBoxChanged(self, i):
-        self.activeDistance = i
-        print(self.activeDistance)
-        self.countDistance(self.activeDistance)
-        self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), self.activeDistance)
+        self._model.setActiveDistance(i)
+        activeDistance = self._model.getActiveDistance()
+        print(activeDistance)
+        self.countDistance(activeDistance)
+        if self._ui.studentsTableView.selectedIndexes() != []:
+            self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), activeDistance)
 
 
     def viewSimilarStudents(self, index, d):
         listOfSimilar = list(list())
-        if(d == 0):
+        if d == 0:
             df = read_csv('distance.csv', usecols=[index])
-        if(d == 1):
+        if d == 1:
             df = read_csv('distanceJaccard.csv', usecols=[index])
         listOfDistances = df.values
         for i in range(len(listOfDistances)):

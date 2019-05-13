@@ -9,6 +9,7 @@ class Model(QObject):
         self._theme = ''
         self._task = ''
         self._tokens = list(list())
+        self._active_distance = 0
         self._distance = []
 
     def setDirectory(self, value):
@@ -34,6 +35,12 @@ class Model(QObject):
 
     def getTokens(self):
         return self._tokens
+
+    def setActiveDistance(self, value):
+        self._active_distance = value
+
+    def getActiveDistance(self):
+        return self._active_distance
 
     def setDistance(self, value):
         self._distance = value

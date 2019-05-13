@@ -88,7 +88,6 @@ class MainController(QObject):
 
             df = read_csv('distanceJaccard.csv')
             listOfDistances = df.values
-            #print(listOfDistances)
             self._model.setDistance(listOfDistances)
 
 
