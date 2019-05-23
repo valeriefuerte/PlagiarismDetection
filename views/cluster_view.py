@@ -21,5 +21,5 @@ class PlotCanvas(FigureCanvas):
         mds = MDS(n_components=2, dissimilarity="precomputed")
         pos = mds.fit(x).embedding_
 
-        self.ax.scatter(pos[:, 0], pos[:, 1], color='turquoise')
+        self.ax.scatter(pos[:, 0], pos[:, 1], color='darkcyan')
         self.draw()
