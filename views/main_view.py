@@ -20,6 +20,9 @@ class MainView(QMainWindow):
         self._ui = Ui_MainWindow()
         self._ui.setupUi(self)
 
+        self.setWindowTitle("Автоматизация анализа массива решений заданий по программированию, включая анализ на плагиат")
+        #self.setWindowIcon(QIcon('icon.png'))
+
         self.clusterView = PlotCanvas(self, width=1, height=1, dpi=100)
         layout = QVBoxLayout(self._ui.clusterWidget)
         layout.addWidget(self.clusterView)
