@@ -29,6 +29,7 @@ class Model(QObject):
         return self._task
 
     def setTokens(self, value):
+        self._tokens.clear()
         self._tokens = value
 
     def getTokens(self):
@@ -41,6 +42,7 @@ class Model(QObject):
         return self._active_distance
 
     def setDistance(self, value):
+        self._distance = []
         self._distance = value
 
     def getDistance(self):
