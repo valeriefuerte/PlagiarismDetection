@@ -1,6 +1,7 @@
 import os
 from PyQt5.QtCore import QObject
-from tokenize import tokenize, NUMBER, STRING, NAME, OP
+#from tokenize import tokenize, NUMBER, STRING, NAME, OP
+from controllers.tokenizer import tokenize, NUMBER, STRING, NAME, OP
 from io import BytesIO
 from pandas import read_csv
 from scipy._lib.six import xrange
