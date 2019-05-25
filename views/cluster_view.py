@@ -18,6 +18,7 @@ class PlotCanvas(FigureCanvas):
         self.ax = self.figure.add_subplot(111)
 
     def plot(self, x):
+        self.ax.clear()
         mds = MDS(n_components=2, dissimilarity="precomputed")
         pos = mds.fit(x).embedding_
 
