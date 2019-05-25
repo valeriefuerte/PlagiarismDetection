@@ -88,7 +88,8 @@ class MainView(QMainWindow):
                 if fnmatch.fnmatch(entry, '*.txt'):
                     studentsList.insert(i, [entry.split("STUDENT - ")[1].split(".txt")[0], self.studentsDir[i]])
 
-        self.studentsList = sorted(studentsList)
+        #self.studentsList = sorted(studentsList)
+        self.studentsList = studentsList
         #print(self.studentsList)
         self.studentsModel = StudentsModel(self.studentsList)
         self._ui.studentsTableView.setModel(self.studentsModel)
@@ -131,7 +132,9 @@ class MainView(QMainWindow):
         self.viewSimilarStudents(self._ui.studentsTableView.selectedIndexes()[0].row(), activeDistance)
 
         listOfTokens = self._model.getTokens()
-        self.findLoops(listOfTokens[index])
+        i = self._ui.studentsTableView.selectedIndexes()[0].row()
+        #print(listOfTokens[i])
+        self.findLoops(listOfTokens[i])
 
 
     def countDistance(self, i):
@@ -145,7 +148,7 @@ class MainView(QMainWindow):
                     listOfFiles = getListOfFiles(dirName, "*.m")
                     self._main_controller.countDistance(listOfFiles, task, self.studentsList, i)
                     d = self._model.getDistance()
-                    print(d)
+                    #print(d)
                     self.clusterView.plot(d)
 
 
@@ -179,6 +182,7 @@ class MainView(QMainWindow):
         countF = 0
         countW = 0
         countR = 0
+        #print(tokens)
         for i in range(len(tokens)):
             t = tokens[i][1]
             if t == 'for':
@@ -190,13 +194,29 @@ class MainView(QMainWindow):
             if t == 'repeat':
                 countR += 1
                 print("Repeat loop")
+            if t == 'rep':
+                countR += 1
+                print("Repeat loop")
+            if t == 'repmat':
+                countR += 1
+                print("Repeat loop")
         #if(countF == 0 & countW == 0 & countR == 0):
             #print("No loop")
+        yesStr = "Встречаются"
+        noStr = "Не встречаются"
 
-        self._ui.forLineEdit.setText(str(countF))
-        self._ui.whileLineEdit.setText(str(countW))
-        self._ui.repeatLineEdit.setText(str(countR))
-
+        if countF != 0:
+            self._ui.forLineEdit.setText(yesStr)
+        else:
+            self._ui.forLineEdit.setText(noStr)
+        if countW != 0:
+            self._ui.whileLineEdit.setText(yesStr)
+        else:
+            self._ui.whileLineEdit.setText(noStr)
+        if countR != 0:
+            self._ui.repeatLineEdit.setText(yesStr)
+        else:
+            self._ui.repeatLineEdit.setText(noStr)
 
 
 def getListOfFiles(dirName, pattern):
